@@ -62,11 +62,12 @@ abstract class CardDatabase : RoomDatabase() {
                 // Add sample words.
 
                 for (i in 0..100) {
-                    when(i % 4) {
+                    when(i % 3) {
                         0 -> cardDao.insert(Card( 0,"lemon", "лимон", R.drawable.lemon))
-                        1 -> cardDao.insert(Card( 0,"apple", "яблоко", R.drawable.lemon))
-                        2 -> cardDao.insert(Card( 0,"orange", "апельсин", R.drawable.lemon))
-                        else -> cardDao.insert(Card( 0,"switch", "переключатель, тумблер", R.drawable.lemon))
+                        1 -> cardDao.insert(Card( 0,"apple", "яблоко", R.drawable.apple))
+                        2 -> cardDao.insert(Card( 0,"orange", "апельсин", R.drawable.orange))
+//                        3 -> cardDao.insert(Card( 0,"dog", "собака", R.drawable.dog))
+//                        else -> cardDao.insert(Card( 0,"switch", "переключатель, тумблер", R.drawable.toggle))
                     }
                 }
                 // TODO: Add your own words!

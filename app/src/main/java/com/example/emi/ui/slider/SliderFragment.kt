@@ -29,21 +29,11 @@ class SliderFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        sliderViewModel =
-//            ViewModelProvider(this).get(SliderViewModel::class.java)
 
         _binding = FragmentSliderBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val viewPager: ViewPager2 = binding.viewPager
-
-        val listPersons =
-            listOf<Person>(
-                Person("andrey", "petrov"),
-                Person("maria", "smirnova"),
-                Person("Tony", "Stark")
-            )
-
         val adapter = SliderAdapter()
         viewPager.adapter = adapter
 

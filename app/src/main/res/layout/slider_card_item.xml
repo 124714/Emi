@@ -8,35 +8,44 @@
 
 
     <androidx.cardview.widget.CardView
-            android:layout_width="300dp" android:layout_height="500dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp" android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="24dp" android:layout_marginEnd="8dp"
+            style='style="?attr/materialCardViewOutlinedStyle"'>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                        android:id="@+id/name"
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:layout_editor_absoluteY="332dp"
-                        android:textSize="36sp"/>
-                <TextView
-                        android:id="@+id/surname"
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="@+id/name"
-                        app:layout_constraintEnd_toEndOf="@+id/name"
-                        app:layout_constraintTop_toBottomOf="@+id/name"
-                        android:layout_marginTop="8dp"
-                        android:textSize="36sp"/>
+            <TextView
+                    android:id="@+id/eng_word"
+                    android:text="eng_word"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="0dp"
+                                               app:layout_constraintEnd_toEndOf="parent"
+                                               app:layout_constraintTop_toTopOf="parent"
+                                               app:layout_constraintStart_toStartOf="parent"
+                                               app:layout_constraintDimensionRatio="1:1" app:cardCornerRadius="24dp"
+                                               android:id="@+id/cardView">
+
+
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" app:srcCompat="@drawable/lemon" android:id="@+id/image_word"
+                        android:adjustViewBounds="false" android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
