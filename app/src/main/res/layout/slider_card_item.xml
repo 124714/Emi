@@ -22,7 +22,7 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:id="@+id/eng_word"
+                    android:id="@+id/eng_idiom"
                     android:text="eng_word"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -9,6 +9,8 @@ class CardRepository(private val wordDao: CardDao) {
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
     val allWords: Flow<List<Card>> = wordDao.getAllCards()
+    val allIdioms: Flow<List<Card>?> = wordDao.getIdioms(true)
+
     init {
         Log.i("CardRepository", "${allWords.toString()}")
     }

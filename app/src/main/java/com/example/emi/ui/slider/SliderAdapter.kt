@@ -27,7 +27,7 @@ class SliderAdapter
 
     class CardViewHolder private constructor(private val itemView: View)
         : RecyclerView.ViewHolder(itemView) {
-        val eng: TextView = itemView.findViewById(R.id.eng_word)
+        val eng: TextView = itemView.findViewById(R.id.eng_idiom)
 //        val rus: TextView = itemView.findViewById(R.id.ru_word)
         val image: ImageView = itemView.findViewById(R.id.image_word)
 

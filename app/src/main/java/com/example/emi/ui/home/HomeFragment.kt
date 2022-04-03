@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.emi.CardsApplication
 import com.example.emi.databinding.FragmentHomeBinding
+import com.example.emi.ui.home.adapters.IdiomsCardAdapter
 import com.example.emi.ui.home.adapters.LearnedCardAdapter
 
 class HomeFragment : Fragment() {
@@ -38,6 +39,18 @@ class HomeFragment : Fragment() {
         homeViewModel.allCards.observe(this) {words ->
             words.let {
                 adapter.submitList(words)
+            }
+        }
+
+        // ---------------------------------------------------------------
+
+        val idiomsCardItem = binding.idiomsCardItem
+        val adapter2 = IdiomsCardAdapter()
+        idiomsCardItem.adapter = adapter2
+
+        homeViewModel.allIdioms.observe(this) {words ->
+            words.let {
+                adapter2.submitList(words)
             }
         }
 

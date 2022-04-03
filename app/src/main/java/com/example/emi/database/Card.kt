@@ -22,7 +22,9 @@ data class Card (
     val img: Int,
 
     @ColumnInfo(name = "date_learned_word")
-    val date: String
+    val date: String?,
 
+    @ColumnInfo(name = "is_idiom")
+    val isIdiom: Boolean
 
 )

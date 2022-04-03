@@ -1,5 +1,7 @@
 package com.example.emi.ui.home.adapters
 
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +13,8 @@ import com.example.emi.R
 import com.example.emi.database.Card
 
 
-class LearnedCardAdapter
-    : ListAdapter<Card, RecyclerView.ViewHolder>(CardsComparator()) {
+class IdiomsCardAdapter
+    : ListAdapter<Card, RecyclerView.ViewHolder>(CardsComparator1()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : RecyclerView.ViewHolder {
@@ -28,29 +30,27 @@ class LearnedCardAdapter
         : RecyclerView.ViewHolder(itemView) {
         val eng: TextView = itemView.findViewById(R.id.eng_idiom)
         val rus: TextView = itemView.findViewById(R.id.rus_idiom)
-        val date_learn: TextView = itemView.findViewById(R.id.date)
+
 
         fun bind(item: Card) {
 
             item.apply {
                 eng.text = engWord
                 rus.text = rusWord
-                date_learn.text = date
-
             }
         }
 
         companion object {
             fun create(parent: ViewGroup): CardViewHolder {
 
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.list_card_item_home_vp2, parent, false)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.idioms_card_item_home, parent, false)
                 return CardViewHolder(view)
             }
         }
     }
 }
 
-private class CardsComparator() : DiffUtil.ItemCallback<Card>() {
+private class CardsComparator1() : DiffUtil.ItemCallback<Card>() {
     override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
         return oldItem === newItem
     }
