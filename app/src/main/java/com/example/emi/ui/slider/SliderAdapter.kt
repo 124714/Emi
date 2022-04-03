@@ -1,15 +1,12 @@
 package com.example.emi.ui.slider
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.emi.R
 import com.example.emi.database.Card
+import com.example.emi.databinding.SliderCardItemBinding
 
 
 class SliderAdapter
@@ -25,26 +22,24 @@ class SliderAdapter
         (holder as CardViewHolder).bind(card)
     }
 
-    class CardViewHolder private constructor(private val itemView: View)
-        : RecyclerView.ViewHolder(itemView) {
-        val eng: TextView = itemView.findViewById(R.id.eng_idiom)
-//        val rus: TextView = itemView.findViewById(R.id.ru_word)
-        val image: ImageView = itemView.findViewById(R.id.image_word)
+    class CardViewHolder private constructor(val binding: SliderCardItemBinding)
+        : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Card) {
 
             item.apply {
-                eng.text = engWord
+                binding.engWord.text = engWord
 //                rus.text = rusWord
-                image.setImageResource(img)
+                binding.imageWord.setImageResource(img)
             }
         }
 
         companion object {
             fun create(parent: ViewGroup): CardViewHolder {
 
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.slider_card_item, parent, false)
-                return CardViewHolder(view)
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = SliderCardItemBinding.inflate(layoutInflater, parent, false)
+                return CardViewHolder(binding)
             }
         }
     }

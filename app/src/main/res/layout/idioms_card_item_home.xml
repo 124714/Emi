@@ -1,66 +1,84 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
-
-    <androidx.cardview.widget.CardView
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="card" type="com.example.emi.database.Card"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:cardCornerRadius="24dp" android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="#2196F3">
-        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="match_parent"
+    >
+
+        <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-        >
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/eng_idiom"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:textSize="24sp"
-                    android:layout_marginStart="8dp" app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/imageView"
-                    android:layout_marginEnd="8dp"/>
-            <TextView
-                    android:text="TextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" android:id="@+id/rus_idiom"
-                    app:layout_constraintTop_toBottomOf="@+id/eng_idiom"
-                    app:layout_constraintStart_toStartOf="@+id/eng_idiom"
-                    app:layout_constraintEnd_toEndOf="@+id/eng_idiom" android:layout_marginTop="16dp"
-                    android:textSize="18sp" app:layout_constraintHorizontal_bias="0.5"
-            />
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/time_64"
-                    android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/imageView" app:layout_constraintTop_toTopOf="@+id/eng_idiom"
-                    app:layout_constraintBottom_toBottomOf="@+id/rus_idiom"/>
-            <View
-                    android:id="@+id/divider"
-                    android:layout_width="158dp"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider"
-                    app:layout_constraintTop_toBottomOf="@+id/rus_idiom" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp"/>
-            <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/btn_star_big_on"
-                    android:id="@+id/imageButton"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" app:layout_constraintTop_toBottomOf="@+id/divider"
-                    android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:cardCornerRadius="24dp" android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="#2196F3">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+            >
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/eng_word"
+                        android:textSize="24sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/imageView"
+                        android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline2"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/rus_word"
+                        app:layout_constraintTop_toBottomOf="@+id/eng_word"
+                        app:layout_constraintStart_toStartOf="@+id/eng_word"
+                        app:layout_constraintEnd_toEndOf="@+id/eng_word" android:layout_marginTop="16dp"
+                        android:textSize="18sp" app:layout_constraintHorizontal_bias="0.5"
+                />
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="@drawable/time_64"
+                        android:id="@+id/imageView" app:layout_constraintTop_toTopOf="@+id/eng_word"
+                        app:layout_constraintBottom_toBottomOf="@+id/rus_word"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline4"/>
+                <View
+                        android:id="@+id/divider"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider"
+                        app:layout_constraintTop_toBottomOf="@+id/rus_word"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline2"
+                        app:layout_constraintEnd_toEndOf="@id/guideline4"/>
+                <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/star_filled"
+                        android:id="@+id/imageButton"
+                        app:layout_constraintTop_toBottomOf="@+id/divider"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="8dp"
+                        android:background="#00FFFFFF" app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/guideline2"/>
+                <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/guideline2"
+                        app:layout_constraintGuide_begin="16dp"
+                        android:orientation="vertical"/>
+                <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/guideline4"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="8dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
