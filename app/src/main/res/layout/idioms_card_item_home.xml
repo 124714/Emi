@@ -2,6 +2,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="card" type="com.example.emi.database.Card"/>
+        <variable name="clickListener" type="com.example.emi.ui.home.adapters.IdiomsCardListener"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -9,6 +10,7 @@
     >
 
         <androidx.cardview.widget.CardView
+                android:onClick="@{() -> clickListener.onClick(card)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -23,29 +25,37 @@
                     android:layout_height="match_parent"
             >
                 <TextView
-                        android:text="TextView"
+                        android:text="@{card.engWord}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/eng_word"
                         android:textSize="24sp"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/imageView"
-                        android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/guideline2"/>
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline2"/>
                 <TextView
-                        android:text="TextView"
+                        android:text="@{card.rusWord}"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content" android:id="@+id/rus_word"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rus_word"
                         app:layout_constraintTop_toBottomOf="@+id/eng_word"
                         app:layout_constraintStart_toStartOf="@+id/eng_word"
-                        app:layout_constraintEnd_toEndOf="@+id/eng_word" android:layout_marginTop="16dp"
-                        android:textSize="18sp" app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintEnd_toEndOf="@+id/eng_word"
+                        android:layout_marginTop="16dp"
+                        android:textSize="18sp"
+                        app:layout_constraintHorizontal_bias="0.5"
                 />
                 <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" app:srcCompat="@drawable/time_64"
-                        android:id="@+id/imageView" app:layout_constraintTop_toTopOf="@+id/eng_word"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/time_64"
+                        android:id="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/eng_word"
                         app:layout_constraintBottom_toBottomOf="@+id/rus_word"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline4"/>
+                        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                        app:categoryImage="@{card}"/>
                 <View
                         android:id="@+id/divider"
                         android:layout_width="0dp"
@@ -64,8 +74,10 @@
                         android:layout_marginTop="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="8dp"
-                        android:background="#00FFFFFF" app:layout_constraintVertical_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"/>
+                        android:background="#00FFFFFF"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/guideline2"
+                        app:inMyVocabulary="@{card}"/>
                 <androidx.constraintlayout.widget.Guideline
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

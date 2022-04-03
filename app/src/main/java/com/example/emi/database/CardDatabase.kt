@@ -66,16 +66,22 @@ abstract class CardDatabase : RoomDatabase() {
                         0 -> cardDao.insert(Card( 0,
                             "lemon",
                             "лимон", R.drawable.lemon,
-                            "понедельник",false ))
+                            "понедельник",false,
+                            "фрукты", true ))
                         1 -> cardDao.insert(Card( 0,
-                            "apple", "яблоко",
-                            R.drawable.apple, "вторник",
-                            false))
+                            "apple",
+                            "яблоко",
+                            R.drawable.apple,
+                            "вторник",
+                            false,
+                            "фрукты", false))
                         2 -> cardDao.insert(Card( 0,
                             "orange",
                             "апельсин",
                             R.drawable.orange,
                              "среда",
+                            false,
+                        "фрукты",
                             false))
 
                         3 -> cardDao.insert(Card( 0,
@@ -83,19 +89,25 @@ abstract class CardDatabase : RoomDatabase() {
                             "всему свое время",
                             R.drawable.orange,
                             null,
+                            true,
+                        "время",
                             true))
                         4 -> cardDao.insert(Card( 0,
-                            "Big time",
-                            "большой успех, популярность, слава",
+                            "blow one's mind",
+                            "потрясти, шокировать",
                             R.drawable.orange,
                             null,
-                            true))
+                            true,
+                        "эмоции",
+                        false))
                         5 -> cardDao.insert(Card( 0,
-                            "The time is ripe",
-                            "настало время",
+                            "chicken out",
+                            "трусить",
                             R.drawable.orange,
                             null,
-                            true))
+                            true,
+                        "животные",
+                        true))
 //                        3 -> cardDao.insert(Card( 0,"dog", "собака", R.drawable.dog))
 //                        else -> cardDao.insert(Card( 0,"switch", "переключатель, тумблер", R.drawable.toggle))
                     }

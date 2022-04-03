@@ -11,7 +11,7 @@ import com.example.emi.database.Card
 import com.example.emi.databinding.IdiomsCardItemHomeBinding
 
 
-class IdiomsCardAdapter
+class IdiomsCardAdapter(val clickListener: IdiomsCardListener)
     : ListAdapter<Card, RecyclerView.ViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<Card>() {
@@ -30,17 +30,17 @@ class IdiomsCardAdapter
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val card = getItem(position)
-        (holder as CardViewHolder).bind(card)
+//        val card = getItem(position)
+//        (holder as CardViewHolder).bind(card)
+        (holder as CardViewHolder).bind(getItem(position)!!, clickListener)
     }
 
-    class CardViewHolder private constructor( val binding: IdiomsCardItemHomeBinding)
+    class CardViewHolder private constructor(private val binding: IdiomsCardItemHomeBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Card) {
-            item.apply {
-                binding.engWord.text = engWord
-                binding.rusWord.text = rusWord
-            }
+        fun bind(item: Card, clickListener: IdiomsCardListener) {
+            binding.card = item
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -54,12 +54,6 @@ class IdiomsCardAdapter
     }
 }
 
-//private class CardsComparator1() : DiffUtil.ItemCallback<Card>() {
-//    override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
-//        return oldItem === newItem
-//    }
-//
-//    override fun areContentsTheSame(oldItem: Card, newItem: Card): Boolean {
-//        return oldItem == newItem
-//    }
-//}
+class IdiomsCardListener(val clickListener: (cardId: Long) -> Unit) {
+    fun onClick(card: Card) = clickListener(card.id)
+}

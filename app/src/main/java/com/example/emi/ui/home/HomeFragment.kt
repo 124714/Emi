@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.emi.CardsApplication
 import com.example.emi.databinding.FragmentHomeBinding
 import com.example.emi.ui.home.adapters.IdiomsCardAdapter
+import com.example.emi.ui.home.adapters.IdiomsCardListener
 import com.example.emi.ui.home.adapters.LearnedCardAdapter
 
 class HomeFragment : Fragment() {
@@ -45,7 +47,9 @@ class HomeFragment : Fragment() {
         // ---------------------------------------------------------------
 
         val idiomsCardItem = binding.idiomsCardItem
-        val adapter2 = IdiomsCardAdapter()
+        val adapter2 = IdiomsCardAdapter(IdiomsCardListener {
+            id -> Toast.makeText(context, "card is pressed [$id]", Toast.LENGTH_SHORT ).show()
+        })
         idiomsCardItem.adapter = adapter2
 
         homeViewModel.allIdioms.observe(this) {words ->
@@ -53,10 +57,6 @@ class HomeFragment : Fragment() {
                 adapter2.submitList(words)
             }
         }
-
-
-
-
 
         return root
     }

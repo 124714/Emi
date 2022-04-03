@@ -25,6 +25,12 @@ data class Card (
     val date: String?,
 
     @ColumnInfo(name = "is_idiom")
-    val isIdiom: Boolean
+    val isIdiom: Boolean,
+
+    @ColumnInfo(name = "category")
+    val category: String?,
+
+    @ColumnInfo(name = "mark")
+    val mark: Boolean
 
 )
