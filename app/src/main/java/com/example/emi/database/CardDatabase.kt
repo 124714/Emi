@@ -63,9 +63,9 @@ abstract class CardDatabase : RoomDatabase() {
 
                 for (i in 0..100) {
                     when(i % 3) {
-                        0 -> cardDao.insert(Card( 0,"lemon", "лимон", R.drawable.lemon))
-                        1 -> cardDao.insert(Card( 0,"apple", "яблоко", R.drawable.apple))
-                        2 -> cardDao.insert(Card( 0,"orange", "апельсин", R.drawable.orange))
+                        0 -> cardDao.insert(Card( 0,"lemon", "лимон", R.drawable.lemon, "понедельник"))
+                        1 -> cardDao.insert(Card( 0,"apple", "яблоко", R.drawable.apple, "вторник"))
+                        2 -> cardDao.insert(Card( 0,"orange", "апельсин", R.drawable.orange, "среда"))
 //                        3 -> cardDao.insert(Card( 0,"dog", "собака", R.drawable.dog))
 //                        else -> cardDao.insert(Card( 0,"switch", "переключатель, тумблер", R.drawable.toggle))
                     }

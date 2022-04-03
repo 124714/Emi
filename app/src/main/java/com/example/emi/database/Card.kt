@@ -19,7 +19,10 @@ data class Card (
 //    val playSound: Int,
 
     @ColumnInfo(name = "id_image_file")
-    val img: Int
+    val img: Int,
+
+    @ColumnInfo(name = "date_learned_word")
+    val date: String
 
 
 )

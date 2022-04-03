@@ -1,13 +1,16 @@
 package com.example.emi.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.emi.database.Card
+import com.example.emi.database.CardRepository
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(val repository: CardRepository,) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    val allCards: LiveData<List<Card>> = repository.allWords.asLiveData()
+
+
+    fun insert(word: Card) = viewModelScope.launch {
+        repository.insert(word)
     }
-    val text: LiveData<String> = _text
 }

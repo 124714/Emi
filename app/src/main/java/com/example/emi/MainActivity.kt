@@ -1,6 +1,10 @@
 package com.example.emi
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -13,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,5 +36,11 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+//        val maximumWindowMetrics = this.windowManager.maximumWindowMetrics
+//        val activityDisplay = this.display
+//        Log.i("display", "${activityDisplay}")
+
+
     }
 }
