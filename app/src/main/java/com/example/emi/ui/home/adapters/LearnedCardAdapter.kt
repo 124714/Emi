@@ -1,11 +1,14 @@
 package com.example.emi.ui.home.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.emi.database.Card
+import com.example.emi.databinding.FragmentHomeBinding
 import com.example.emi.databinding.ListCardItemHomeVp2Binding
 
 
@@ -16,7 +19,6 @@ class LearnedCardAdapter
         override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
             return oldItem === newItem
         }
-
         override fun areContentsTheSame(oldItem: Card, newItem: Card): Boolean {
             return oldItem == newItem
         }
@@ -24,6 +26,7 @@ class LearnedCardAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : RecyclerView.ViewHolder {
+
         return CardViewHolder.create(parent)
     }
 
@@ -41,6 +44,7 @@ class LearnedCardAdapter
                 binding.engWord.text = engWord
                 binding.rusWord.text = rusWord
                 binding.date.text = date
+                binding.executePendingBindings()
 
             }
         }
@@ -49,6 +53,7 @@ class LearnedCardAdapter
             fun create(parent: ViewGroup): CardViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListCardItemHomeVp2Binding.inflate(layoutInflater, parent, false)
+
                 return CardViewHolder(binding)
             }
         }

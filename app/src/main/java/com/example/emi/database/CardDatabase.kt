@@ -5,14 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.emi.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Card::class], version = 1, exportSchema = false)
+@Database(entities = [Card::class, Progress::class, MarkedCard::class], version = 1, exportSchema = false)
 abstract class CardDatabase : RoomDatabase() {
 
     abstract val cardDao: CardDao
+    abstract val progressDao: ProgressDao
+    abstract val markedCardDao: MarkedCardDao
 
     companion object {
         @Volatile
@@ -49,69 +50,42 @@ abstract class CardDatabase : RoomDatabase() {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
                     scope.launch {
-                        var cardDao = database.cardDao
-                        populateDatabase(database.cardDao)
+//                        var cardDao = database.cardDao
+                        populateDatabase(database.cardDao, database.progressDao)
+
                     }
                 }
             }
 
-            suspend fun populateDatabase(cardDao: CardDao) {
+            suspend fun populateDatabase(cardDao: CardDao, progressDao: ProgressDao) {
                 // Delete all content here.
                 cardDao.deleteAll()
 
                 // Add sample words.
 
-                for (i in 0..100) {
-                    when(i % 6) {
-                        0 -> cardDao.insert(Card( 0,
-                            "lemon",
-                            "лимон", R.drawable.lemon,
-                            "понедельник",false,
-                            "фрукты", true ))
-                        1 -> cardDao.insert(Card( 0,
-                            "apple",
-                            "яблоко",
-                            R.drawable.apple,
-                            "вторник",
-                            false,
-                            "фрукты", false))
-                        2 -> cardDao.insert(Card( 0,
-                            "orange",
-                            "апельсин",
-                            R.drawable.orange,
-                             "среда",
-                            false,
-                        "фрукты",
-                            false))
+//                for (i in 0..100) {
+//                    when(i % 6) {
+                       /* 0 -> */cardDao.insert(TestData.myCards[0])
+                        /*1 ->*/ cardDao.insert(TestData.myCards[1])
+                        /*2 ->*/ cardDao.insert(TestData.myCards[2])
+                        /*3 ->*/ cardDao.insert(TestData.myCards[3])
+                        /*4 ->*/ cardDao.insert(TestData.myCards[4])
+                        /*5 ->*/ cardDao.insert(TestData.myCards[5])
+//
+//                    }
+//                }
 
-                        3 -> cardDao.insert(Card( 0,
-                            "all in good time",
-                            "всему свое время",
-                            R.drawable.orange,
-                            null,
-                            true,
-                        "время",
-                            true))
-                        4 -> cardDao.insert(Card( 0,
-                            "blow one's mind",
-                            "потрясти, шокировать",
-                            R.drawable.orange,
-                            null,
-                            true,
-                        "эмоции",
-                        false))
-                        5 -> cardDao.insert(Card( 0,
-                            "chicken out",
-                            "трусить",
-                            R.drawable.orange,
-                            null,
-                            true,
-                        "животные",
-                        true))
-//                        3 -> cardDao.insert(Card( 0,"dog", "собака", R.drawable.dog))
-//                        else -> cardDao.insert(Card( 0,"switch", "переключатель, тумблер", R.drawable.toggle))
-                    }
-                }
+//                for (i in 0..100) {
+//                    when(i % 6) {
+                        /*0 ->*/ progressDao.insert(TestData.progress[0])
+                        /*1 -> */progressDao.insert(TestData.progress[1])
+                        /*2 ->*/ progressDao.insert(TestData.progress[2])
+                        /*3 ->*/ progressDao.insert(TestData.progress[3])
+                        /*4 ->*/ progressDao.insert(TestData.progress[4])
+                        /*5 ->*/ progressDao.insert(TestData.progress[5])
+//                    }
+//                }
+
                 // TODO: Add your own words!
             }
         }

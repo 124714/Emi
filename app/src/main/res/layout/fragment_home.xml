@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable name="homeViewModel" type="com.example.emi.ui.home.HomeViewModel"/>
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout 
             android:layout_width="match_parent"
@@ -43,7 +43,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/learned_card_text"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="8dp"
                         app:layout_constraintHorizontal_bias="0.0"
                         android:id="@+id/learned_card_chips">
                     <com.google.android.material.chip.ChipGroup
@@ -82,7 +81,7 @@
                         android:layout_height="wrap_content" android:id="@+id/eng_idioms_text"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp" android:textSize="18sp"
-                        app:layout_constraintTop_toBottomOf="@+id/learned_card_divider" android:layout_marginTop="8dp"/>
+                        app:layout_constraintTop_toBottomOf="@+id/learned_card_divider" android:layout_marginTop="4dp"/>
                 <androidx.viewpager2.widget.ViewPager2
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -97,7 +96,7 @@
                         android:background="?android:attr/listDivider"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintHorizontal_bias="1.0" app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/list_card_item_home" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/list_card_item_home" android:layout_marginTop="4dp"
                         android:layout_marginStart="8dp" android:layout_marginEnd="8dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

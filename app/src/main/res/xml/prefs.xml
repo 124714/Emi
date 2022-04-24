@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Enable message notifications"/>
+
+    <Preference
+            app:key="feedback"
+            app:title="Send feedback"
+            app:summary="Report technical issues or suggest new features"/>
+
+    <Preference
+        app:key="about_programm"
+        app:title="О программе"
+        app:icon="@drawable/baseline_info_24"/>
+
+
+
+</androidx.preference.PreferenceScreen>

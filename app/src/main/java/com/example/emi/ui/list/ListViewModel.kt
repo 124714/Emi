@@ -1,4 +1,5 @@
-package com.example.emi.ui.home
+package com.example.emi.ui.list
+
 
 import android.util.Log
 import android.widget.Toast
@@ -7,7 +8,7 @@ import com.example.emi.database.Card
 import com.example.emi.database.CardRepository
 import kotlinx.coroutines.launch
 
-class HomeViewModel(val repository: CardRepository,) : ViewModel() {
+class ListViewModel(val repository: CardRepository,) : ViewModel() {
 
     val allCards: LiveData<MutableList<Card>> = repository.allWords
 
@@ -17,9 +18,7 @@ class HomeViewModel(val repository: CardRepository,) : ViewModel() {
     val category: LiveData<List<String>>
         get() =_category
 
-    init {
-        _category.value = listOf("животные", "эмоции", "время", "цвета", "одиннадацать","игра")
-    }
+
 
     fun insert(word: Card) = viewModelScope.launch {
         repository.insert(word)

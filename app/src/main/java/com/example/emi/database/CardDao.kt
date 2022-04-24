@@ -1,8 +1,11 @@
 package com.example.emi.database
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.example.emi.database.Card
 import kotlinx.coroutines.flow.Flow
@@ -24,9 +27,20 @@ interface CardDao {
     @Query("DELETE FROM word_table")
     suspend fun deleteAll()
 
+//    @Query("SELECT * FROM word_table")
+//    fun getAllCards(): Flow<List<Card>>ff
+
     @Query("SELECT * FROM word_table")
-    fun getAllCards(): Flow<List<Card>>
+    fun getAllCards(): LiveData<MutableList<Card>>
 
     @Query("SELECT * FROM word_table WHERE is_idiom = :mark")
     fun getIdioms(mark: Boolean): Flow<List<Card>?>
+
+    @Transaction
+    @Query("select * from word_table")
+    fun getCardsAndMarkedCard(): Flow<List<CardAndMarkedCard>>
+
+    @Query("select mark from word_table where id  = :cardId")
+    fun isMarked(cardId: Long): Boolean
+
 }

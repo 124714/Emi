@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="words_array">
+        <item>lemon/лимон/lemon/фрукты</item>
+        <item>orange/апельсин/orange/фрукты</item>
+    </string-array>
+</resources>

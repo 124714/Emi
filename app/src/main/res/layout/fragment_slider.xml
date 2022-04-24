@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable name="sliderViewModel" type="com.example.emi.ui.slider.SliderViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -10,17 +10,29 @@
             android:layout_marginBottom="?actionBarSize"
             tools:context=".ui.slider.SliderFragment">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:onClick="@{() -> sliderViewModel.fabButtonIsClicked()}"
+                app:fabSize="mini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/repeat"
+                android:layout_margin="12dp" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
 
         <androidx.viewpager2.widget.ViewPager2
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:id="@+id/view_pager"
                 tools:listitem="@layout/slider_card_item"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@android:color/holo_orange_light"
-                />
+                android:background="@android:color/background_light"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.viewpager2.widget.ViewPager2>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

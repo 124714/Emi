@@ -12,9 +12,9 @@ import com.example.emi.databinding.IdiomsCardItemHomeBinding
 
 
 class IdiomsCardAdapter(val clickListener: IdiomsCardListener)
-    : ListAdapter<Card, RecyclerView.ViewHolder>(DiffCallback) {
+    : ListAdapter<Card, RecyclerView.ViewHolder>(IdiomsDiffCallback) {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Card>() {
+    companion object IdiomsDiffCallback : DiffUtil.ItemCallback<Card>() {
         override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
             return oldItem === newItem
         }

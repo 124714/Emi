@@ -1,8 +1,7 @@
 package com.example.emi.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.annotation.DrawableRes
+import androidx.room.*
 
 @Entity(tableName = "word_table")
 data class Card (
@@ -17,7 +16,7 @@ data class Card (
 
 //    @ColumnInfo(name = "id_audio_file")
 //    val playSound: Int,
-
+    @DrawableRes
     @ColumnInfo(name = "id_image_file")
     val img: Int,
 
@@ -31,6 +30,29 @@ data class Card (
     val category: String?,
 
     @ColumnInfo(name = "mark")
-    val mark: Boolean
+    var mark: Boolean = false
 
+)
+
+@Entity(
+    tableName = "table_marked_card",
+    foreignKeys = [
+        ForeignKey(entity = Card::class, parentColumns = ["id"], childColumns = ["id_card"])
+    ],
+    indices = [Index("id_card")]
+)
+data class MarkedCard(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_marked_card")
+    val idMarkedCard: Long = 0L,
+    val id_card: Long,
+)
+
+data class CardAndMarkedCard(
+    @Embedded val card: Card,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "id_marked_card"
+    )
+    val markedCard: MarkedCard?
 )

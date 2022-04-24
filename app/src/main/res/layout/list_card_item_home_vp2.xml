@@ -3,6 +3,8 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="card" type="com.example.emi.database.Card"/>
+        <variable name="homeViewModel" type="com.example.emi.ui.home.HomeViewModel"/>
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

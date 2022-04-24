@@ -3,4 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_slider">Карточки</string>
     <string name="title_settings">Настройки</string>
+    <string name="title_list">Список</string>
+
 </resources>
