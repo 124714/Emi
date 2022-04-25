@@ -29,12 +29,11 @@ class SliderViewModel(val repository: CardRepository,) : ViewModel() {
 //    var cardId: Long? = null
 
     // Все карточки из БД
-    val allCards: LiveData<MutableList<Card>> = repository.allWords
+    val allCards: LiveData<List<Card>> = repository.allWords.asLiveData()
 
-    val _aCards = MutableLiveData<MutableList<Card>>(allCards.value)
-    val aCards: LiveData<MutableList<Card>>
+    val _aCards = MutableLiveData<List<Card>>(allCards.value)
+    val aCards: LiveData<List<Card>>
         get() = _aCards
-
     // Весь прогресс из БД
     val allProgress: LiveData<List<Progress>> = repository.userProgress.asLiveData()
 
@@ -51,11 +50,7 @@ class SliderViewModel(val repository: CardRepository,) : ViewModel() {
         get() = _justAddedCard
 
 
-    fun addCard() {
-        val currentList = _aCards.value
-        currentList?.add(TestData.myCards[0])
-        _aCards.postValue(currentList)
-    }
+
     // Только что добавленные карточки из SliderAdapter
     fun addCardFromSlider(cards: MutableList<Card>) {
         _justAddedCard.value = cards
@@ -70,26 +65,6 @@ class SliderViewModel(val repository: CardRepository,) : ViewModel() {
     fun insert(word: Card) = viewModelScope.launch {
         repository.insert(word)
     }
-
-    fun setMark(card: Card) {
-       viewModelScope.launch(Dispatchers.IO) {
-            repository.marked(card)
-        }
-    }
-
-    fun unmark(card: Card) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.unmarked(card)
-        }
-    }
-
-
-//    fun isMarked(cardId: Long): Boolean {
-//        return when(allMarkedCards.value?.find{ mCard -> mCard.id_card == cardId }) {
-//            null -> false
-//            else -> true
-//        }
-//    }
 
     override fun onCleared() {
         super.onCleared()

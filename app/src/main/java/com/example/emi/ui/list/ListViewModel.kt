@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class ListViewModel(val repository: CardRepository,) : ViewModel() {
 
-    val allCards: LiveData<MutableList<Card>> = repository.allWords
+    val allCards: LiveData<List<Card>> = repository.allWords.asLiveData()
 
     val allIdioms: LiveData<List<Card>?> = repository.allIdioms.asLiveData()
 

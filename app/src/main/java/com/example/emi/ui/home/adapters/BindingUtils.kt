@@ -35,8 +35,9 @@ fun ImageView.setInMyVocabulery(viewModel: SliderViewModel) {
 
 @BindingAdapter("cardText")
 fun TextView.setCardText(item: Card) {
-    item.let {
-        text = item.engWord
+    when(id) {
+        R.id.eng_word -> text = item.engWord
+        R.id.rus_word -> text = item.rusWord
     }
 }
 
@@ -54,8 +55,6 @@ fun ImageView.setCardImage(item: Card) {
 
 @BindingAdapter("cardMark")
 fun ImageButton.setCardMark(card: Card) {
-
-
     when(card.mark) {
         true -> {
             ViewAnimation.scaler(this, this)

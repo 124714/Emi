@@ -63,28 +63,27 @@ abstract class CardDatabase : RoomDatabase() {
 
                 // Add sample words.
 
-//                for (i in 0..100) {
-//                    when(i % 6) {
-                       /* 0 -> */cardDao.insert(TestData.myCards[0])
-                        /*1 ->*/ cardDao.insert(TestData.myCards[1])
-                        /*2 ->*/ cardDao.insert(TestData.myCards[2])
-                        /*3 ->*/ cardDao.insert(TestData.myCards[3])
-                        /*4 ->*/ cardDao.insert(TestData.myCards[4])
-                        /*5 ->*/ cardDao.insert(TestData.myCards[5])
-//
-//                    }
-//                }
+                for (i in 0..1000) {
+                    when(i % 6) {
+                        0 -> cardDao.insert(TestData.myCards[0])
+                        1 -> cardDao.insert(TestData.myCards[1])
+                        2 -> cardDao.insert(TestData.myCards[2])
+                        3 -> cardDao.insert(TestData.myCards[3])
+                        4 -> cardDao.insert(TestData.myCards[4])
+                        5 -> cardDao.insert(TestData.myCards[5])
+                    }
+                }
 
-//                for (i in 0..100) {
-//                    when(i % 6) {
-                        /*0 ->*/ progressDao.insert(TestData.progress[0])
-                        /*1 -> */progressDao.insert(TestData.progress[1])
-                        /*2 ->*/ progressDao.insert(TestData.progress[2])
-                        /*3 ->*/ progressDao.insert(TestData.progress[3])
-                        /*4 ->*/ progressDao.insert(TestData.progress[4])
-                        /*5 ->*/ progressDao.insert(TestData.progress[5])
-//                    }
-//                }
+                for (i in 0..1000) {
+                    when(i % 6) {
+                        0 -> progressDao.insert(TestData.progress[0])
+                        1 -> progressDao.insert(TestData.progress[1])
+                        2 -> progressDao.insert(TestData.progress[2])
+                        3 -> progressDao.insert(TestData.progress[3])
+                        4 -> progressDao.insert(TestData.progress[4])
+                        5 -> progressDao.insert(TestData.progress[5])
+                    }
+                }
 
                 // TODO: Add your own words!
             }

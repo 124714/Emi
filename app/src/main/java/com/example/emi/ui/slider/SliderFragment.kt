@@ -41,8 +41,8 @@ class SliderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSliderBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
-        binding.sliderViewModel = sliderViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+//        binding.sliderViewModel = sliderViewModel
         val root: View = binding.root
         return root
     }
@@ -51,43 +51,21 @@ class SliderFragment : Fragment() {
         viewPager = binding.viewPager
         positionDataStore = SettingsDataStore(requireContext().dataStore)
         val adapter = SliderAdapter(
-            sliderViewModel,
             StarButtonListener { card ->
                 sliderViewModel.updateCard(card.copy().apply{mark = !mark})
             }
             )
 
         viewPager.adapter = adapter
-
-
-
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                startPositionViewPager = position
                 lifecycleScope.launch{
                     positionDataStore.saveLayoutToPreferencesStore(position, requireContext())
                 }
             }
         })
-
-
-        //---------------------------------------------------------------------------------
-//        sliderViewModel.progress.observe(this) { value ->
-//            Timber.i("progress: ${convertLongToDateString(value.dateLearnedCard)}")
-//        }
-//
-//        sliderViewModel.allCardAndMarkedCard.observe(this) { value ->
-//            Timber.i("allCardAndMarkedCards: ${value.size}")
-//        }
-//
-//        sliderViewModel.allMarkedCards.observe(this) { value ->
-//            Timber.i("allMarkedCards: ${value}")
-//        }
-//
-//        sliderViewModel.justAddedCard.observe(this) { value ->
-//            Timber.i("justAddedCard: $value")
-//        }
-
 
 
         //---------------------------------------------------------------------------------
@@ -103,28 +81,8 @@ class SliderFragment : Fragment() {
         }
 
 
-        // Наблюдаем за только что добавленными карточками
-        sliderViewModel.fabButtonEvent.observe(viewLifecycleOwner) { it ->
-//            Timber.i("fabButtonEvent: $it")
-            if (it == true) {
-//                Timber.i("${sliderViewModel.justAddedCard.value}")
-            }
-        }
 
     }
-
-
-
-//    private fun setupViewPager() {
-//        val adapter = SliderAdapter(SliderViewModel)
-//        viewPager.adapter = adapter
-//        sliderViewModel.allCards.observe(this) {words ->
-//            words.let {
-//                adapter.submitList(words)
-//            }
-//        }
-//    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

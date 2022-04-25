@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(val repository: CardRepository,) : ViewModel() {
 
-    val allCards: LiveData<MutableList<Card>> = repository.allWords
+    val allCards: LiveData<List<Card>> = repository.allWords.asLiveData()
 
     val allIdioms: LiveData<List<Card>?> = repository.allIdioms.asLiveData()
 
@@ -24,10 +24,5 @@ class HomeViewModel(val repository: CardRepository,) : ViewModel() {
     fun insert(word: Card) = viewModelScope.launch {
         repository.insert(word)
     }
-
-    fun hello() {
-        Log.i("homeView", "hello")
-    }
-
 
 }

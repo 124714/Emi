@@ -27,11 +27,8 @@ interface CardDao {
     @Query("DELETE FROM word_table")
     suspend fun deleteAll()
 
-//    @Query("SELECT * FROM word_table")
-//    fun getAllCards(): Flow<List<Card>>ff
-
     @Query("SELECT * FROM word_table")
-    fun getAllCards(): LiveData<MutableList<Card>>
+    fun getAllCards(): Flow<List<Card>>
 
     @Query("SELECT * FROM word_table WHERE is_idiom = :mark")
     fun getIdioms(mark: Boolean): Flow<List<Card>?>

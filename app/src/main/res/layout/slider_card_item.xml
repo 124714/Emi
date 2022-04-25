@@ -3,7 +3,6 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="card" type="com.example.emi.database.Card"/>
-        <variable name="viewModel" type="com.example.emi.ui.slider.SliderViewModel"/>
         <variable name="starClickListener" type="com.example.emi.ui.slider.StarButtonListener"/>
 
 
@@ -31,6 +30,22 @@
                 <TextView
                         android:id="@+id/eng_word"
                         android:text="eng_word"
+                        app:cardText="@{card}"
+                        android:visibility="visible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:fontFamily="@font/oswald"
+                        android:textColor="@color/primaryColor"/>
+
+                <TextView
+                        android:id="@+id/rus_word"
+                        android:visibility="invisible"
+                        android:text="rus_word"
                         app:cardText="@{card}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
