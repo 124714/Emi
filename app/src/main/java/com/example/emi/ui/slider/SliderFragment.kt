@@ -1,39 +1,47 @@
 package com.example.emi.ui.slider
 
-
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import androidx.recyclerview.widget.SnapHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.example.emi.CardsApplication
-import com.example.emi.R
-import com.example.emi.convertLongToDateString
-import com.example.emi.data.SettingsDataStore
-import com.example.emi.data.dataStore
-
+import com.example.emi.data.*
 import com.example.emi.databinding.FragmentSliderBinding
-import com.google.android.material.slider.Slider
-
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-
 import timber.log.Timber
 
+
+
 class SliderFragment : Fragment() {
-    private val sliderViewModel: SliderViewModel by viewModels {
-        SliderViewModelFactory((requireNotNull(this.activity).application as CardsApplication).repository)
+    private val sliderViewModel: SliderViewModel by activityViewModels() {
+        SliderViewModelFactory(
+            (requireNotNull(this.activity).application as CardsApplication).repository,
+            UserPreferencesRepository(requireContext().dataStore))
     }
+
     private var _binding: FragmentSliderBinding? = null
     private val binding get() = _binding!!
-    private lateinit var positionDataStore: SettingsDataStore
-    private lateinit var viewPager: ViewPager2
-    private var startPositionViewPager = 0
+    private lateinit var list: RecyclerView
+    private lateinit var adapter: SliderAdapter
+    private val snapHelper = PagerSnapHelper()
+    private lateinit var layoutManager: LinearLayoutManager
+    private var isScrollUpdate = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,53 +50,68 @@ class SliderFragment : Fragment() {
     ): View? {
         _binding = FragmentSliderBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-//        binding.sliderViewModel = sliderViewModel
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewPager = binding.viewPager
-        positionDataStore = SettingsDataStore(requireContext().dataStore)
-        val adapter = SliderAdapter(
-            StarButtonListener { card ->
-                sliderViewModel.updateCard(card.copy().apply{mark = !mark})
-            }
-            )
+        setupViewPager()
 
-        viewPager.adapter = adapter
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                startPositionViewPager = position
-                lifecycleScope.launch{
-                    positionDataStore.saveLayoutToPreferencesStore(position, requireContext())
-                }
-            }
-        })
-
-
-        //---------------------------------------------------------------------------------
-        positionDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) { value ->
-            startPositionViewPager = value
-            sliderViewModel.allCards.observe(this) { words ->
-                words.let {
-                    adapter.submitList(words)
-                    viewPager.currentItem = startPositionViewPager
-                }
-
-            }
+        sliderViewModel.initialSetupEvent.observe(viewLifecycleOwner) {
+            updatePosition(it.startPositionViewPager)
+            observePreferenceChanges()
         }
 
-
+        binding.fab.setOnClickListener{
+            findNavController().navigate(SliderFragmentDirections.actionNavigationSliderToSliderRepeatFragment())
+        }
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Timber.i("destroyed")
-//        viewPager.unregisterOnPageChangeCallback()
+    private fun setupViewPager() {
+        list = binding.list
+        adapter = SliderAdapter(
+            StarButtonListener { card ->
+                sliderViewModel.updateCard(card)
+                }
+        )
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        list.layoutManager = layoutManager
+        list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                updatePosition(layoutManager.findFirstVisibleItemPosition())
+            }
+        })
+        list.adapter = adapter
+        snapHelper.attachToRecyclerView(list)
+    }
+
+    private fun observePreferenceChanges() {
+        sliderViewModel.cardListModel.observe(viewLifecycleOwner) { cards ->
+            adapter.submitList(cards.cards)
+            if (isScrollUpdate) {
+                updateScrollPosition(cards.startPosition)
+                isScrollUpdate = false
+            }
+        }
+    }
+
+    private fun updatePosition(pos: Int) {
+        sliderViewModel.savePosition(pos)
+    }
+
+    private fun updateScrollPosition(pos: Int) {
+        list.scrollToPosition(pos)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
         _binding = null
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        sliderViewModel.saveLastPosition()
     }
 
 }
