@@ -11,5 +11,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        
     </style>
+    <style name="CustomChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipIcon">@drawable/visibility</item>
+        <item name="checkedIcon">@drawable/hide</item>
+    </style>
+
+
+
 </resources>

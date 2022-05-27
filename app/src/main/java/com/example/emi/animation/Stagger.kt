@@ -13,7 +13,7 @@ import androidx.transition.SidePropagation
 import androidx.transition.TransitionValues
 
 
-const val LARGE_EXPAND_DURATION = 300L
+const val LARGE_EXPAND_DURATION = 500L
 val LINEAR_OUT_SLOW_IN: TimeInterpolator by lazy(LazyThreadSafetyMode.NONE) {
     PathInterpolatorCompat.create(0f, 0f, 0.2f, 1f)
 }

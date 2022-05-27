@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/backdrop_fragment_background"
+    >
+        <TextView
+                android:text="Период"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/tv_period"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="140dp"
+                android:layout_height="120dp"
+                android:id="@+id/textInputLayout2"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@+id/textInputLayout" android:labelFor="@id/tv_period"
+                app:layout_constraintTop_toBottomOf="@+id/tv_period"
+                app:errorEnabled="true" app:errorContentDescription="@string/hello_blank_fragment"
+        >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Начало" android:text="11-03-2022" android:paddingTop="36dp"
+                    android:backgroundTint="#FFFFFF" android:paddingStart="0dp" android:id="@+id/start_date_input"
+                    android:textIsSelectable="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:id="@+id/textInputLayout"
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textInputLayout2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Конец" android:text="12-03-2022" android:paddingTop="36dp"
+                    android:backgroundTint="#FFFFFF" android:paddingStart="0dp" android:id="@+id/end_date_input"
+                    android:textIsSelectable="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <CalendarView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/calendarView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@android:style/Widget.DeviceDefault.CalendarView"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        <Button
+                android:text="продолжить"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/btn_ok"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout" android:layout_marginTop="2dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

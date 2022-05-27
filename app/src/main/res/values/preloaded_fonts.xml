@@ -2,6 +2,9 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/candal</item>
+        <item>@font/droid_sans</item>
+        <item>@font/fascinate</item>
+        <item>@font/monoton</item>
         <item>@font/oswald</item>
     </array>
 </resources>

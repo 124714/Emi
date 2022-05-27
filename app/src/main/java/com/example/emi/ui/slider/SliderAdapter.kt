@@ -1,5 +1,6 @@
 package com.example.emi.ui.slider
 
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,27 +11,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.emi.R
 import com.example.emi.animation.ViewAnimation
 import com.example.emi.database.Card
-import com.example.emi.database.TestData
+import com.example.emi.databinding.SliderCardItem2Binding
 import com.example.emi.databinding.SliderCardItemBinding
-import timber.log.Timber
 
 
 class SliderAdapter(
-    private val starClickListener: StarButtonListener )
+    private val clickListener: StarButtonListener,
+    private val clickListener2: AudioBtnListener
+)
     : ListAdapter<Card, RecyclerView.ViewHolder>(SliderDiffCallBack) {
+
     companion object SliderDiffCallBack : DiffUtil.ItemCallback<Card>() {
         override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
             return oldItem.id == newItem.id
         }
-
         override fun areContentsTheSame(oldItem: Card, newItem: Card): Boolean {
             return oldItem == newItem
         }
-    }
-
-    override fun onCurrentListChanged(previousList: MutableList<Card>, currentList: MutableList<Card>) {
-        super.onCurrentListChanged(previousList, currentList)
-        Timber.i("list changed")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
@@ -40,63 +37,67 @@ class SliderAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val card = getItem(position)
-        (holder as CardViewHolder).bind(card, starClickListener)
+        (holder as CardViewHolder).bind(card, clickListener, clickListener2)
 
     }
 
     class CardViewHolder private constructor(private val binding: SliderCardItemBinding)
         : RecyclerView.ViewHolder(binding.root){
-
-
-
-
-        fun bind(item: Card, starClickListener: StarButtonListener) {
-            item.apply {
-                binding.card = item
-                binding.starClickListener = starClickListener
-                Timber.i("BIND[${item.id}]: ${item.mark}")
-                binding.executePendingBindings()
+        fun bind(item: Card, clickListener: StarButtonListener, clickListener2: AudioBtnListener) {
+            with(binding) {
+                card = item
+                this.clickListener = clickListener
+                this.clickListener2 = clickListener2
+                executePendingBindings()
             }
         }
-
         init {
-            binding.flipCard.setOnClickListener{
-                ViewAnimation.rotater(binding.flippedCard, binding.flipCard)
-                when(binding.engWord.isVisible){
-                    true -> {
-                        binding.apply{
-                            engWord.visibility = View.INVISIBLE
-                            rusWord.visibility = View.VISIBLE
-                        }
-                    }
-                    false -> {
-                        binding.apply{
-                            engWord.visibility = View.VISIBLE
-                            rusWord.visibility = View.INVISIBLE
-                        }
-                    }
-                }
-            }
+//            setupFlipCardListener()
         }
+
+//        private fun setupFlipCardListener() {
+//            binding.flipCard.setOnClickListener{
+//                ViewAnimation.rotater(binding.flippedCard, binding.flipCard)
+//                when(binding.engWord.isVisible){
+//                    true -> {
+//                        binding.apply{
+//                            engWord.visibility = View.INVISIBLE
+//                            rusWord.visibility = View.VISIBLE
+//                        }
+//                    }
+//                    false -> {
+//                        binding.apply{
+//                            engWord.visibility = View.VISIBLE
+//                            rusWord.visibility = View.INVISIBLE
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         companion object {
             fun create(parent: ViewGroup): CardViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = SliderCardItemBinding.inflate(layoutInflater, parent, false)
+//                val binding = SliderCardItem2Binding.inflate(layoutInflater, parent, false)
                 return CardViewHolder(binding)
             }
-            // Только что добавленные карточки
-            private val justAddedCard: MutableList<Card> = mutableListOf()
-
 
         }
     }
 
 }
 
-class StarButtonListener(val starClickListener: (card: Card) -> Unit) {
-    fun onStarClick(card: Card) = starClickListener(card)
+class StarButtonListener(val clickListener: (card: Card) -> Unit) {
+    fun onClick(card: Card) = clickListener(card)
 }
+
+class AudioBtnListener(val clickListener: (s: String) -> Unit) {
+    fun onClick(s: String) = clickListener(s)
+}
+
+
+
 
 
 

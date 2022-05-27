@@ -8,4 +8,6 @@
   <color name="secondaryDarkColor">#002f6c</color>
   <color name="primaryTextColor">#ffffff</color>
   <color name="secondaryTextColor">#ffffff</color>
+    <color name="colorDisableChip">#c1caca</color>
+  <color name="colorEnableChip">#d0e3f7</color>
 </resources>

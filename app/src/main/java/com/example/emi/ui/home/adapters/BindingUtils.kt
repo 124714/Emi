@@ -1,5 +1,7 @@
 package com.example.emi.ui.home.adapters
 
+import android.view.View
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -57,12 +59,23 @@ fun ImageView.setCardImage(item: Card) {
 fun ImageButton.setCardMark(card: Card) {
     when(card.mark) {
         true -> {
-            ViewAnimation.scaler(this, this)
+//            ViewAnimation.scaler(this, this)
             setImageResource(R.drawable.star_filled)
         }
         false -> {
-            ViewAnimation.scaler(this, this)
+//            ViewAnimation.scaler(this, this)
             setImageResource(R.drawable.star)
         }
     }
 }
+
+
+
+@BindingAdapter("markedCard")
+fun ImageView.setCardMark(card: Card) {
+    when(card.mark) {
+        true -> this.visibility = View.VISIBLE
+        else -> this.visibility = View.GONE
+    }
+}
+

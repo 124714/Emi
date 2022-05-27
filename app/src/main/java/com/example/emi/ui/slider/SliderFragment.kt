@@ -1,31 +1,27 @@
 package com.example.emi.ui.slider
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
-import androidx.recyclerview.widget.SnapHelper
-import androidx.viewpager2.widget.ViewPager2
 import com.example.emi.CardsApplication
+import com.example.emi.R
 import com.example.emi.data.*
+import com.example.emi.database.Progress
 import com.example.emi.databinding.FragmentSliderBinding
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import com.example.emi.databinding.ListFragmentBinding
+import com.example.emi.ui.sliderRepeat.SliderRepeatFragment2Args
 import timber.log.Timber
-
 
 
 class SliderFragment : Fragment() {
@@ -43,28 +39,51 @@ class SliderFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private var isScrollUpdate = true
 
+    private val args by navArgs<SliderFragmentArgs>()
+    private val position by lazy { args.position}
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Timber.i("onCreateView")
         _binding = FragmentSliderBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+//        val args = SliderFragmentArgs.fromBundle(requireArguments())
+        Toast.makeText(context, "${args.position}", Toast.LENGTH_SHORT).show()
+
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewPager()
-
+        Timber.i("onViewCreated")
         sliderViewModel.initialSetupEvent.observe(viewLifecycleOwner) {
             updatePosition(it.startPositionViewPager)
             observePreferenceChanges()
         }
-
+//        sliderViewModel.allProgress.observe(viewLifecycleOwner) {progress ->
+//            Timber.i("$progress")
+//        }
         binding.fab.setOnClickListener{
             findNavController().navigate(SliderFragmentDirections.actionNavigationSliderToSliderRepeatFragment())
+
         }
 
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Timber.i("onAttach")
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Timber.i("onCreate")
     }
 
     private fun setupViewPager() {
@@ -72,7 +91,18 @@ class SliderFragment : Fragment() {
         adapter = SliderAdapter(
             StarButtonListener { card ->
                 sliderViewModel.updateCard(card)
-                }
+                sliderViewModel.updateFilter(card.copy().apply { mark = !mark })
+                sliderViewModel.updateProgress(Progress(0, card.id), !card.mark)
+                },
+            AudioBtnListener {word ->
+
+                // переделать (MediaPlayer.OnPrepareListener)
+                MediaPlayer
+                    .create(context, resources
+                        .getIdentifier(convertToTextResourseName(word), "raw", context?.packageName))
+                    .start()
+            }
+
         )
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         list.layoutManager = layoutManager
@@ -89,9 +119,9 @@ class SliderFragment : Fragment() {
     private fun observePreferenceChanges() {
         sliderViewModel.cardListModel.observe(viewLifecycleOwner) { cards ->
             adapter.submitList(cards.cards)
-            if (isScrollUpdate) {
+            if (sliderViewModel.isScrollUpdate) {
                 updateScrollPosition(cards.startPosition)
-                isScrollUpdate = false
+                sliderViewModel.isScrollUpdate = false
             }
         }
     }
@@ -114,4 +144,17 @@ class SliderFragment : Fragment() {
         sliderViewModel.saveLastPosition()
     }
 
+    private fun convertToTextResourseName(s: String): String {
+
+        val apostrophe = "'"
+        val space = " "
+        return if (apostrophe in s) {
+            convertToTextResourseName(s.replace(apostrophe, ""))
+        } else if(space in s) {
+            convertToTextResourseName(s.replace(space, "_"))
+        } else {
+            s
+        }
+
+    }
 }

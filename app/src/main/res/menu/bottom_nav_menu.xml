@@ -8,12 +8,12 @@
 
     <item
             android:id="@+id/navigation_slider"
-            android:icon="@drawable/flash_card"
+            android:icon="@drawable/cards"
             android:title="@string/title_slider"/>
 
     <item
             android:id="@+id/navigation_list"
-            android:icon="@drawable/flash_card"
+            android:icon="@drawable/list"
             android:title="@string/title_list"/>
 
     <item

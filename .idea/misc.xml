@@ -3,25 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable-small/drawable.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/backdrop_fragment_background.xml" value="0.20092592592592592" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/baseline_info_24.xml" value="0.1" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/baseline_settings_24.xml" value="0.12962962962962962" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/baseline_view_carousel_24.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.20185185185185187" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/card_style.xml" value="0.20092592592592592" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/hdpi.xml" value="0.12962962962962962" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/text_style.xml" value="0.20092592592592592" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/text_style2.xml" value="0.20092592592592592" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/drawable/text_style3.xml" value="0.20092592592592592" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/cards_visible.xml" value="0.20425724637681159" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/cards_visible_chips.xml" value="0.20425724637681159" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_back_drop.xml" value="0.264" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_dashboard.xml" value="0.161231884057971" />
-        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_home.xml" value="0.20572916666666666" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_notifications.xml" value="0.161231884057971" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_settings.xml" value="0.161231884057971" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_slider.xml" value="0.27789473684210525" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/fragment_slider_repeat.xml" value="0.176" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/idioms_card_item_home.xml" value="0.264" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/item2.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_card_item_home.xml" value="0.2" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_card_item_home.xml" value="0.6" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_card_item_home2.xml" value="0.49047619047619045" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_card_item_home_vp2.xml" value="0.11626139817629179" />
-        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_card_item_recycler.xml" value="0.264" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_card_item_recycler.xml" value="0.4" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_card_item_recycler2.xml" value="0.20606884057971014" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/list_fragment.xml" value="0.20425724637681159" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/region_learned_card_chips.xml" value="0.2" />
-        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/slider_card_item.xml" value="0.264" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/slider_card_item.xml" value="0.2" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/slider_card_item2.xml" value="0.2" />
+        <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/slider_card_item_2.xml" value="0.20606884057971014" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/layout/test_layout.xml" value="0.6" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2546875" />
         <entry key="..\:/AndroidProject/Samsung/MyProject/project_5/app/src/main/res/xml/preferences.xml" value="0.1" />

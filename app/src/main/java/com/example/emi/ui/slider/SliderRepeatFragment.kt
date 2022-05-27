@@ -5,21 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.emi.CardsApplication
 import com.example.emi.R
-//import com.example.emi.data.SettingsDataStore
 import com.example.emi.data.UserPreferencesRepository
 import com.example.emi.data.dataStore
 import com.example.emi.database.Card
-import com.example.emi.databinding.FragmentSliderBinding
 import com.example.emi.databinding.FragmentSliderRepeatBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
+import timber.log.Timber
 
 class SliderRepeatFragment : Fragment() {
     private val sliderViewModel: SliderViewModel by activityViewModels() {
@@ -47,10 +44,9 @@ class SliderRepeatFragment : Fragment() {
         setupViewPager()
         observeJustAddedCard()
         observeChips()
-
-        binding.fab.setOnClickListener{
-            findNavController().navigate(SliderRepeatFragmentDirections.actionSliderRepeatFragmentToNavigationSlider())
-        }
+//        binding.fab.setOnClickListener{
+//            findNavController().navigate(SliderRepeatFragmentDirections.actionSliderRepeatFragmentToNavigationSlider())
+//        }
     }
 
     private fun setupViewPager() {
@@ -58,11 +54,14 @@ class SliderRepeatFragment : Fragment() {
         adapter = SliderAdapter(
             StarButtonListener { card ->
                 sliderViewModel.updateCard(card)
+            },
+            AudioBtnListener { card ->
+                "hello"
             }
         )
         viewPager.adapter = adapter
-    }
 
+    }
     private fun observeChips() {
         sliderViewModel.cardList.observe(viewLifecycleOwner, object: Observer<MutableList<Card>> {
             override fun onChanged(data: MutableList<Card>?) {
@@ -70,12 +69,12 @@ class SliderRepeatFragment : Fragment() {
                 // Создаем новый Chip для каждого элемента в списке
                 val chipGroup = binding.wordList
                 val inflator = LayoutInflater.from(chipGroup.context)
-
                 val children = data.map {card ->
                     val chip = inflator.inflate(R.layout.cards_visible_chips, chipGroup, false) as Chip
                     chip.text = card.engWord
                     chip.tag = card
                     chip.setOnCheckedChangeListener { button, isChecked ->
+                        Timber.i("${button.tag as Card}: $isChecked")
                         sliderViewModel.onChangeFilter(button.tag as Card, isChecked)
                     }
                     chip
@@ -91,9 +90,13 @@ class SliderRepeatFragment : Fragment() {
         })
     }
     private fun observeJustAddedCard(){
-        sliderViewModel.justAddedCard.observe(this) { cards ->
-            adapter.submitList(cards)
-        }
+//        sliderViewModel.justAddedCard.observe(this) { cards ->
+//            adapter.submitList(cards)
+//        }
+
+//        sliderViewModel.cardAndDate.observe(this) {cards ->
+//            adapter.submitList(cards)
+//        }
     }
 
 

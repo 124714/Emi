@@ -28,5 +28,20 @@ class ListViewModel(val repository: CardRepository,) : ViewModel() {
         Log.i("homeView", "hello")
     }
 
+    private val _navigateToSliderFragment = MutableLiveData<Int?>()
+    val navigateToSliderFragment: LiveData<Int?>
+        get() = _navigateToSliderFragment
+
+    fun onListItemClicked(pos: Int) {
+        _navigateToSliderFragment.value = pos
+    }
+//
+//    fun onSliderFragmentNavigated() {
+//        _navigateToSliderFragment.value = null
+//    }
+
+    fun doneNavigating() {
+        _navigateToSliderFragment.value = null
+    }
 
 }

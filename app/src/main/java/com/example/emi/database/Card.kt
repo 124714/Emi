@@ -14,8 +14,10 @@ data class Card (
     @ColumnInfo(name = "russian_word")
     val rusWord: String,
 
+
 //    @ColumnInfo(name = "id_audio_file")
-//    val playSound: Int,
+//    val idAudioFile: Int = 0,
+
     @DrawableRes
     @ColumnInfo(name = "id_image_file")
     val img: Int,
@@ -30,9 +32,14 @@ data class Card (
     val category: String?,
 
     @ColumnInfo(name = "mark")
-    var mark: Boolean = false
+    var mark: Boolean = true
 
-)
+) {
+    override fun toString(): String {
+        return "Card[id: $id, eng: $engWord, mark: $mark]"
+    }
+
+}
 
 @Entity(
     tableName = "table_marked_card",
@@ -56,3 +63,4 @@ data class CardAndMarkedCard(
     )
     val markedCard: MarkedCard?
 )
+

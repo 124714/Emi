@@ -8,6 +8,10 @@ import com.example.emi.data.UserPreferences
 import com.example.emi.data.UserPreferencesRepository
 import com.example.emi.database.Card
 import com.example.emi.database.CardRepository
+import com.example.emi.database.Progress
+import com.example.emi.database.TestData
+import com.example.emi.toFilteredList
+import com.example.emi.toList
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -21,17 +25,29 @@ class SliderViewModel(
     val repository: CardRepository,
     private val userPreferencesRepository: UserPreferencesRepository) : ViewModel() {
 
+//    val cardAndDate = repository.getCardsForDate("09-мая-2022","10-мая-2022").asLiveData()
 
+    private var filter = CardFilter()
+    val allProgress: LiveData<List<Progress>> = repository.userProgress.asLiveData()
 
+//    val allProgress: LiveData<List<Progress>> = repository.Progress.asLiveData()
+    fun updateProgress(progress: Progress, mark: Boolean) = viewModelScope.launch {
+        when(mark) {
+            true -> repository.insertProgress(progress)
+            false -> repository.deleteProgress(progress.cardId)
+        }
+    }
     //------------------------------------------------------------------
     // Только что добаленные карточки
     private val cardsForRepeat = mutableListOf<Card>()
-    private val filter = mutableMapOf<Card, Boolean>()
+//    private val filter = mutableMapOf<Card, Boolean>()
 
     // chips
-    private val _cardList = MutableLiveData(cardsForRepeat)
-    private val _justAddedCard = MutableLiveData(cardsForRepeat)
-
+    private val _cardList = MutableLiveData<MutableList<Card>>()
+    private val _justAddedCard = MutableLiveData<MutableList<Card>>()
+    init {
+        onDataChanged()
+    }
 
     val cardList: LiveData<MutableList<Card>>
         get() = _cardList
@@ -39,26 +55,25 @@ class SliderViewModel(
         get() = _justAddedCard
 
     fun onChangeFilter(card: Card, isChecked: Boolean){
-        filter[card] = isChecked
-        _justAddedCard.postValue(filter.toFilteredList())
+//        filter.initFilter(card)
+        filter.update(card, isChecked)
+        _justAddedCard.value = filter.getCardsForFilter()
+
+    }
+
+    private fun onDataChanged() {
+        _justAddedCard.value = filter.getCardsForFilter()
+        _cardList.value = filter.getFilters()
+//        Timber.i("onDataChanged: JAC ${_justAddedCard.value} CL ${_cardList.value}")
     }
 
 
-    private fun MutableMap<Card, Boolean>.toFilteredList(): MutableList<Card> {
-        val list = mutableListOf<Card>()
-        for (i in this){
-            if(!i.value) {
-                list.add(i.key)
-            }
-        }
-        return list
-    }
 
     // Только что добавленные карточки из SliderAdapter
     private fun addCardForRepeat(card: Card) {
         if (card !in cardsForRepeat) {
             cardsForRepeat.add(card)
-            filter[card] = false
+//            filter[card] = false
         }
     }
 
@@ -66,15 +81,13 @@ class SliderViewModel(
         viewModelScope.launch {
             val markedCard = card.copy().apply{mark = !mark}
             repository.updateCard(markedCard)
-            //***************************
-            if(markedCard.mark) {
-                addCardForRepeat(card)
-            }
-            if (markedCard in cardsForRepeat && !markedCard.mark) {
-                cardsForRepeat.remove(markedCard)
-                filter[markedCard] = false
-            }
         }
+    }
+
+    fun updateFilter(card: Card) {
+//        Timber.i("updateFilter: $card")
+        filter.initFilter(card)
+        onDataChanged()
     }
     // -----------------------------------------------------------
 
@@ -84,7 +97,7 @@ class SliderViewModel(
 
     override fun onCleared() {
         super.onCleared()
-//        Timber.i("SliderViewModel destroyed")
+
     }
 
     companion object {
@@ -127,16 +140,45 @@ class SliderViewModel(
         emit(userPreferencesRepository.fetchInitialPreferences())
     }
 
-    private class CardFilter {
-        val filter = mutableMapOf<Card, Boolean>()
-        fun update(changeFilter: Card, isChecked: Boolean) {
-            if(isChecked) {
 
+
+    private class CardFilter {
+        val currentValue = mutableMapOf<Card, Boolean>()
+        fun initFilter(card: Card) {
+            Timber.i("initFilter")
+            if(card.mark) {
+                Timber.i("IF1: $card")
+                currentValue[card] = false
+
+            }
+            if(!card.mark ) {
+                if(card.apply { mark = !mark } in currentValue) {
+                    Timber.i("abc")
+                    currentValue.remove(card)
+
+                }
             }
         }
 
+        fun update(changeFilter: Card, isChecked: Boolean): Boolean {
+            currentValue[changeFilter] = isChecked
+
+            return true
+        }
+
+        fun getCardsForFilter(): MutableList<Card> {
+            return currentValue.toFilteredList()
+        }
+
+        fun getFilters(): MutableList<Card> {
+            return currentValue.toList()
+        }
 
     }
+
+    var isScrollUpdate = true
+
+
 
 
 }
